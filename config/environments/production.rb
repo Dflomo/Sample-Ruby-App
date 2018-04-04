@@ -93,7 +93,7 @@ Rails.application.configure do
   host = 'pacific-tor-39359.herokuapp.com'
   config.action_mailer.default_url_options = {host: host}
   ActionMailer::Base.smtp_settings = {
-    :user_name            => ENV['SENDGRIND_USERNAME'],
+    :user_name            => ENV['SENDGRID_USERNAME'],
     :password             => ENV['SENDGRID_PASSWORD'],
     :domain               => 'heroku.com',
     :address              => 'smtp.sendgrind.net',
