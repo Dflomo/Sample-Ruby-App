@@ -1,6 +1,12 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :deliver_with => :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
+    :email_prefix => "[PREFIX] ",
+    :sender_address => %{"notifier" <notifier@example.com>},
+    :exception_recipients => %w{derek.florimonte@workshopcafe.com}
+  }
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -80,6 +86,23 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  host = 'pacific-tor-39359.herokuapp.com'
+  config.action_mailer.default_url_options = {host: host}
+  ActionMailer::Base.smtp_settings = {
+    :user_name            => ENV['SENDGRIND_USERNAME'],
+    :password             => ENV['SENDGRID_PASSWORD'],
+    :domain               => 'heroku.com',
+    :address              => 'smtp.sendgrind.net',
+    :port                 => '587',
+    :authentication       => :plain,
+    :enable_starttls_auto => true
+  }
+
+
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
@@ -88,21 +111,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-
-
-
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
-  host = 'pacific-tor-39359.herokuapp.com'
-  config.action_mailer.default_url_options = {host: host}
-  ActionMailer::Base.smtp_settings = {
-    :address              => 'smtp.sendgrind.net',
-    :port                 => '587',
-    :authentication       => :plain,
-    :user_name            => ENV['SENDGRIND_USERNAME'],
-    :password             => ENV['SENDGRID_PASSWORD'],
-    :domain               => 'heroku.com',
-    :enable_starttls_auto => true
-  }
 end

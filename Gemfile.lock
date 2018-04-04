@@ -62,6 +62,9 @@ GEM
     concurrent-ruby (1.0.5)
     crass (1.0.3)
     erubi (1.7.0)
+    exception_notification (4.2.2)
+      actionmailer (>= 4.0, < 6)
+      activesupport (>= 4.0, < 6)
     execjs (2.7.0)
     faker (1.7.3)
       i18n (~> 0.5)
@@ -213,6 +216,7 @@ DEPENDENCIES
   bootstrap-will_paginate (= 1.0.0)
   byebug (= 9.0.6)
   coffee-rails (= 4.2.2)
+  exception_notification
   faker (= 1.7.3)
   guard (= 2.13.0)
   guard-minitest (= 2.4.4)
