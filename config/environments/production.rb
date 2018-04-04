@@ -5,7 +5,7 @@ Rails.application.configure do
     :deliver_with => :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
     :email_prefix => "[PREFIX] ",
     :sender_address => %{"notifier" <notifier@example.com>},
-    :exception_recipients => %w{derek.florimonte@workshopcafe.com}
+    :exception_recipients => %w{"derek.florimonte@workshopcafe.com"}
   }
   # Code is not reloaded between requests.
   config.cache_classes = true
