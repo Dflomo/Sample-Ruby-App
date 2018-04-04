@@ -95,7 +95,7 @@ Rails.application.configure do
   ActionMailer::Base.smtp_settings = {
     :user_name            => ENV['SENDGRID_USERNAME'],
     :password             => ENV['SENDGRID_PASSWORD'],
-    :domain               => 'herokuapp.com',
+    :domain               => 'https://pacific-tor-39359.herokuapp.com',
     :address              => 'smtp.sendgrind.net',
     :port                 => '587',
     :authentication       => :plain,
