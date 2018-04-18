@@ -5,13 +5,23 @@
             <h1>
                 <%= gravatar_for @user %>
                 <%= @user.name %>
-                <%= @user.email %>
+            </h1>
+            <h1><%= @user.email %></h1>
                 
-                <div>Created: <%= @user.created_at %></div>
+               <--<div>Created: <%= @user.created_at %></div>
 
                 <div>Updated: <%= @user.updated_at %></div>
-                <p>The time Is: <%= Time.now %></p>
+                <p>The time Is: <%= Time.now %></p> -->
             </h1>   
         </section>
     </aside>
+    <div class="col-md-8">
+    <% if @user.microposts.any? %>
+      <h3>Microposts (<%= @user.microposts.count %>)</h3>
+      <ol class="microposts">
+        <%= render @microposts %>
+      </ol>
+      <%= will_paginate @microposts %>
+    <% end %>
+  </div>
 </div>
